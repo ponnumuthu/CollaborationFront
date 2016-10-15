@@ -1,0 +1,29 @@
+
+     <form ng-submit="ctrl.submit()" method="post" style="margin-left: 25%;" name="myForm">
+     <h2 style="margin-bottom: 0em;">Login Here</h2>
+     <section class="content bgcolor-1" style="margin-top: -3em;">
+					<span class="input input--nao" style="margin-top: 0em;">
+					<input class="input__field input__field--nao" type="text" id="userName" name="userName" ng-model="ctrl.user.userName" />
+					<label class="input__label input__label--nao" for="userName">
+						<span class="input__label-content input__label-content--nao">Username</span>
+					</label>
+					<svg class="graphic graphic--nao" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
+						<path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"/>
+					</svg>
+				</span><br>
+				
+     			<span class="input input--nao" style="margin-top: 0em;">
+					<input class="input__field input__field--nao" type="text" id="passWord" name="passWord" ng-model="ctrl.user.passWord" />
+					<label class="input__label input__label--nao" for="passWord">
+						<span class="input__label-content input__label-content--nao">Password</span>
+					</label>
+					<svg class="graphic graphic--nao" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
+						<path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"/>
+					</svg>
+				</span><br>
+				<span class="input input--nao" style="margin-top: -1em;">
+				<input align="center" type="submit" name="submit" value="Login" class="btn btn-success" style="margin-top: -1em;" ng-disabled="myForm.$invalid">
+				
+				</span>
+     		</section>
+     </form>
