@@ -1,6 +1,6 @@
 'use strict';
  
-angular.module('myApp').controller('UserController', ['$scope', 'UserService', function($scope, UserService) {
+angular.module('myApp').controller('UserController', ['$scope', '$location', 'UserService', function($scope, $location, UserService) {
     
 	var self = this;
 	self.user={userId:'',userName:'',role:'',emailId:'',phoneNo:'',passWord:'',address:'',zipCode:''};
@@ -11,9 +11,9 @@ angular.module('myApp').controller('UserController', ['$scope', 'UserService', f
     self.remove = remove;
     self.reset = reset; 
     
-    reset();
+
     fetchAllUsers();
- 
+    reset();
 
     function fetchAllUsers(){
         UserService.fetchAllUsers()
@@ -29,8 +29,11 @@ angular.module('myApp').controller('UserController', ['$scope', 'UserService', f
     function createUser(user){
         UserService.createUser(user)
             .then(
+            		 $location.path('/login'),
             		$scope.message="your are successfully Registered",
-            fetchAllUsers,
+            		
+            		fetchAllUsers,
+           
             function(errResponse){
                 console.error('Error while creating User');
             }

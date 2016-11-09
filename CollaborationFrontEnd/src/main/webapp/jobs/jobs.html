@@ -1,0 +1,27 @@
+<h4 style="float: right; margin: 0px 0px 0px 0px;"><a href="#createJob">Create New Jobs</a></h4>
+
+<table class="table table-hover">
+                      <thead>
+                          <tr>
+                              <th>job Id:</th>
+                              <th>Job Name:</th>
+                              <th>companyName</th>
+                              <th>Description</th>
+                              <th>Author:</th>
+                              <th width="20%"></th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr ng-repeat="u in job.jobs">
+                              <td><span ng-bind="u.jobId"></span></td>
+                              <td><span ng-bind="u.jobName"></span></td>
+                              <td><span ng-bind="u.companyName"></span></td>
+                              <td><span ng-bind="u.technologiesExpected"></span></td>
+                              <td><span ng-bind="u.address"></span></td>
+           						<td>
+                              <button type="button" ng-click="job.edit(u.jobId)" class="btn btn-success custom-width">Edit</button>  
+                              <button type="button" ng-click="job.remove(u.jobId)" class="btn btn-danger custom-width">Remove</button>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>

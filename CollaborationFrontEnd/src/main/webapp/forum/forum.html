@@ -1,0 +1,52 @@
+
+<h4 style="float: right; margin: 0px 0px 0px 0px;"><a href="#createForum">Create New Forum</a></h4>
+
+<div class="row "ng-repeat="u in forum.forums">
+
+
+  <div class="viewForum" style="margin-left: -1em; white-space: nowrap;">
+
+
+   <h3 style="margin-left: 0.5em; float: left; color: green;"><span ng-bind="u.forumTitle"></span></h3>
+
+   <a ng-click=""><span class="glyphicon glyphicon-pencil editContent"></span></a>
+   <a  ng-click="forum.remove(u.forumId)"><span class="glyphicon glyphicon-trash editContent"></span></a>
+   <hr style="clear: both;" />
+ 
+
+  <div>
+   <h4><span ng-bind="u.forumContent | limitTo : 40"></span></h4>
+  </div>
+  <hr style="margin-top: 3em;">
+  <span ng-bind="u.forumContent | limitTo : 300"></span>...
+  <hr style="margin-top: 1em;">
+  <div class="desc">
+  <button type="button" ng-click="forum.get(u)" style="float: right;">Read More ></button>
+  </div>
+ </div>
+</div>
+
+<!-- <table class="table table-hover">
+                      <thead>
+                          <tr>
+                              <th>foru id</th>
+                              <th>foru title:</th>
+                              <th>content</th>
+                              <th>date</th>
+                              <th width="20%"></th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr ng-repeat="u in forum.forums">
+                              <td><span ng-bind="u.forumId"></span></td>
+                              <td><span ng-bind="u.forumTitle"></span></td>
+                              <td><span ng-bind="u.forumContent"></span></td>
+                              <td><span ng-bind="u.date"></span></td>
+                              
+           						<td>
+                              <button type="button" ng-click="" class="btn btn-success custom-width">Edit</button>  
+                              <button type="button" ng-click="forum.remove(u.forumId)" class="btn btn-danger custom-width">Remove</button>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table> -->

@@ -4,15 +4,44 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <style type="text/css">
-
+.abc:hover{
+-moz-box-shadow: 0 0 10px #ccc; 
+-webkit-box-shadow: 0 0 10px #ccc; 
+box-shadow: 0 0 10px #ccc; 
+    background-color: #F5F5F9;
+}
 
 
 </style>
 </head>
-<body>
-<div class="column-content-region col-sm-3" style="background-color: blue;">
-<h1>hai</h1>
+<body style="padding-left: 0em;">
+{{userId}}
+{{userName}}
+<div class="column-content-region col-sm-3"  ng-controller="ForumController as forum">
+<h3>Forums</h3>
+<div class="abc" ng-repeat="u in forum.forums" ng-click="forum.get(u)">
+<h1><span ng-bind="u.forumTitle"></span></h1><h6>Created On:<span ng-bind="u.date"></span></h6>
+<h5><span ng-bind="u.forumContent | limitTo : 25"></span></h5>
+<hr>
+</div>
 </div>
 
+<div class="column-content-region col-sm-3" style="margin-left: 2em;" ng-controller="BlogController as blog">
+<h3>Blogs</h3>
+<div class="abc" ng-repeat="u in blog.blogs" ng-click="blog.get(u)">
+<h1><span ng-bind="u.blogName"></span></h1><h6>Authored By:<span ng-bind="u.userName"></span></h6>
+<h3><span ng-bind="u.desc"></span></h3>
+<hr>
+</div>
+</div>
+
+<div class="column-content-region col-sm-3" style="margin-left: 2em;" ng-controller="JobController as job">
+<h3>Jobs</h3>
+<div class="abc" ng-repeat="u in job.jobs" >
+<h1><span ng-bind="u.jobName"></span></h1><h6>Company Name:<span ng-bind="u.companyName"></span></h6>
+<h3><span ng-bind="u.technologiesExpected"></span></h3><h3><span ng-bind="u.address"></span></h3>
+<hr>
+</div>
+</div>
 </body>
 </html>

@@ -67,17 +67,22 @@
 						<path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"/>
 					</svg>
 				</span><br>
-				<span class="input input--nao" style="margin-top: -1em;">
-					<select name="role" ng-model="ctrl.user.role">
+				<span class="input input--nao" style="margin-top: 0em;" >
+					<select name="role" ng-model="ctrl.user.role" style="outline: none; border-left: none; border-right: none; border-top: none; width: 100%;">
+					<option value="">Select your Role</option>
 						<option value="student">Student</option>
 						<option value="alumini">Alumini</option>
 						<option value="employee">Employee</option>				
 					</select>
 				</span><br>
-				<span class="input input--nao" style="margin-top: -1em;">
-				<input align="center" type="submit" name="submit" value="submit" class="btn btn-success" style="margin-top: -1em;" ng-disabled="myForm.$invalid">
-				
+				<div class="row">
+				<span class="input input--nao" style="margin-top: -1em; margin-left: 2em;">
+				<a href="#login"> Existing User? </a>				
+				<input type="submit" name="submit" value="Register" class="btn btn-success" style="margin-left: 10em;" ng-disabled="myForm.$invalid">
+				  <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
 				</span>
+				
+				</div>
 			</section>
 
 					

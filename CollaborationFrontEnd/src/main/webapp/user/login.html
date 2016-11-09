@@ -1,9 +1,9 @@
 
-     <form ng-submit="ctrl.submit()" method="post" style="margin-left: 25%;" name="myForm">
+     <form ng-submit="vm.login()" method="post" style="margin-left: 25%;" name="myForm">
      <h2 style="margin-bottom: 0em;">Login Here</h2>
      <section class="content bgcolor-1" style="margin-top: -3em;">
 					<span class="input input--nao" style="margin-top: 0em;">
-					<input class="input__field input__field--nao" type="text" id="userName" name="userName" ng-model="ctrl.user.userName" />
+					<input class="input__field input__field--nao" type="text" id="userName" name="userName" ng-model="vm.userName" />
 					<label class="input__label input__label--nao" for="userName">
 						<span class="input__label-content input__label-content--nao">Username</span>
 					</label>
@@ -13,7 +13,7 @@
 				</span><br>
 				
      			<span class="input input--nao" style="margin-top: 0em;">
-					<input class="input__field input__field--nao" type="text" id="passWord" name="passWord" ng-model="ctrl.user.passWord" />
+					<input class="input__field input__field--nao" type="password" id="passWord" name="passWord" ng-model="vm.passWord" />
 					<label class="input__label input__label--nao" for="passWord">
 						<span class="input__label-content input__label-content--nao">Password</span>
 					</label>
@@ -21,9 +21,53 @@
 						<path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"/>
 					</svg>
 				</span><br>
-				<span class="input input--nao" style="margin-top: -1em;">
-				<input align="center" type="submit" name="submit" value="Login" class="btn btn-success" style="margin-top: -1em;" ng-disabled="myForm.$invalid">
-				
+				{{message}}
+				<div class="row">
+				<span class="input input--nao" style="margin-top: -1em; margin-left: 2em;">
+				<a href="#register"> New User? </a>				
+				<input type="submit" name="submit" value="Login" class="btn btn-success" style="margin-left: 13em;" ng-disabled="myForm.$invalid">
+				  <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
 				</span>
+				
+				</div>
      		</section>
      </form>
+     
+     <!-- /container -->
+		<script src="js/classie.js"></script>
+		<script>
+			(function() {
+				// trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
+				if (!String.prototype.trim) {
+					(function() {
+						// Make sure we trim BOM and NBSP
+						var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+						String.prototype.trim = function() {
+							return this.replace(rtrim, '');
+						};
+					})();
+				}
+
+				[].slice.call( document.querySelectorAll( 'input.input__field' ) ).forEach( function( inputEl ) {
+					// in case the input is already filled..
+					if( inputEl.value.trim() !== '' ) {
+						classie.add( inputEl.parentNode, 'input--filled' );
+					}
+
+					// events:
+					inputEl.addEventListener( 'focus', onInputFocus );
+					inputEl.addEventListener( 'blur', onInputBlur );
+				} );
+
+				function onInputFocus( ev ) {
+					classie.add( ev.target.parentNode, 'input--filled' );
+				}
+
+				function onInputBlur( ev ) {
+					if( ev.target.value.trim() === '' ) {
+						classie.remove( ev.target.parentNode, 'input--filled' );
+					}
+				}
+			})();
+		</script>
+     

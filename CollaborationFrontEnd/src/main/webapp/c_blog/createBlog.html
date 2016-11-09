@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<style type="text/css">
+form {
+	text-align: center;
+	width: 50%;
+	margin: 0 auto;
+}
+
+input,
+textarea {
+	display: block;
+	width: 100%;
+	border: 0;
+	padding: 10px 5px;
+  background: white no-repeat;
+	
+	/*
+	* IMPORTANT PART HERE
+	*/
+	
+  /* 2 imgs : 1px gray line (normal state) AND 2px green line (focus state) */
+	background-image: linear-gradient(to bottom, #1abc9c, #1abc9c), linear-gradient(to bottom, silver, silver);
+	/* sizes for the 2 images (default state) */
+	background-size: 0 2px, 100% 1px;
+	/* positions for the 2 images. Change both "50%" to "0%" or "100%" and tri again */
+	background-position: 50% 100%, 50% 100%;
+
+	/* animation solely on background-size */
+  transition: background-size 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+
+}
+
+input:focus,
+textarea:focus{
+  /* sizes for the 2 images (focus state) */
+	background-size: 100% 2px, 100% 1px;
+	outline: none;
+}
+</style>
+</head>
+<body>
+<form ng-submit="bc.submit()" name="myForm" class="form-horizontal">
+
+<table>
+
+ <label> Blog Name:</label>
+<input placeholder="Enter a Blog Name" type="text" ng-model="bc.blog.blogName" name="blogName" id="blogName">
+
+<input placeholder="Enter a Blog Description" type="text" ng-model="bc.blog.desc" name="desc" id="desc">
+
+<label style="margin-top: 3em;"> Blog Content: </label><textarea placeholder="content" ng-model="bc.blog.content" name="content" id="content" maxlength="2000"></textarea>
+
+<input style="margin-top: 2em;" type="submit"  class="btn btn-success" value="Create Blog">
+<input style="margin-top: 1em;" class="btn btn-danger" type="reset" name="reset" value="Reset">
+
+	</table>
+	
+	
+
+</form> 
+</body>
+</html>

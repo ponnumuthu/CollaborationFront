@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html ng-controller="CommentController as comment">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<font size="30" color="red">{{forum.forumTitle}} | {{forum.date}}</font><h6></h6>
+<h5>{{forum.forumContent}}</h5>
+
+<div class="row "ng-repeat="u in comment.comments">
+<span ng-bind="u.CommentId"></span>
+
+<span ng-bind="u.commends"></span>
+</div>
+
+<form ng-submit="comment.submit()" name="myForm" class="form-horizontal">
+<textarea rows="4" cols="50" ng-model="comment.commends"></textarea><br>
+<input type="submit"  class="btn btn-success" value="Comment">
+</form>
+</body>
+</html>

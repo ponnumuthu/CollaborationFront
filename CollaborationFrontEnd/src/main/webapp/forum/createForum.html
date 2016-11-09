@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<style type="text/css">
+textarea.expandable {
+  height:100px;
+  -webkit-transition: all 0.5s ease-in-out;
+}
+
+textarea.expandable:hover, textarea.expandable:focus {
+  height:calc(100% - 90px);      
+  -webkit-transition: all 0.8s ease-in-out;
+}
+      
+.panel-300:hover, .panel-300 {
+  height:300px;    
+}
+
+textarea.expandable + textarea.expandable:hover, textarea.expandable + textarea.expandable:focus {
+  height:calc(100% - 90px)	
+}
+
+
+
+</style>
+</head>
+<body>
+<form ng-submit="fc.submit()" name="myForm">
+<div class="container"> 
+         <div class="panel-body panel-300" style="width: 65%;">
+         <span style="margin-left: -13em;">Forum Title :</span>
+         <input type="text"  class="form-control" ng-model="fc.forum.forumTitle" name="forumTitle" placeholder="Forum Name.."><br>
+         <span style="margin-left: 0em;">Forum Content :</span>
+           <textarea class="form-control expandable" type="text" ng-model="fc.forum.forumContent" id="forumContent" placeholder="Forum Content" rows="2"></textarea>
+       <br><br>
+          <input type="submit" class="btn btn-success" name="submit" value="Create Forum">
+          </div>
+       </div>
+
+
+
+</form>
+</body>
+</html>

@@ -19,13 +19,25 @@
   
    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script> 
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
-  <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-cookies.js"></script>
+
+  		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
 		<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.2.0/css/font-awesome.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/demo.css" />
 		<link rel="stylesheet" type="text/css" href="css/set2.css" />
   	  <script type="text/javascript" src="app.js"></script>
   	  <script type="text/javascript" src="user/UserController.js"></script>
   	  <script type="text/javascript" src="user/UserService.js"></script>
+  	   <script type="text/javascript" src="user/AuthenticationService.js"></script>
+  	   <script type="text/javascript" src="user/LoginController.js"></script>
+  	   <script type="text/javascript" src="user/FlashService.js"></script>
+  	   
+  	  <script type="text/javascript" src="c_blog/BlogController.js"></script>
+  	  <script type="text/javascript" src="c_blog/BlogService.js"></script>
+  	  <script type="text/javascript" src="forum/ForumController.js"></script>
+  	  <script type="text/javascript" src="forum/ForumService.js"></script>
+  	  <script type="text/javascript" src="jobs/JobController.js"></script>
+  	  <script type="text/javascript" src="jobs/JobService.js"></script>
   	  
 <style>
 
@@ -167,6 +179,25 @@ ul{
     display: block;
    padding: 5px 25px;
 }
+.dropdown-menu {
+    top: 165%;
+    right: auto;
+    left: 0;    
+    border-top: 5px solid #CC2127;
+    padding: 0;
+   	
+    float: left;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+   
+    border-radius: 4px;box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    
+}
+
 body a {
      /* transition: 0.5s all ease;*/
    -webkit-transition: 0.5s all ease;
@@ -177,6 +208,7 @@ body a {
 }
 a {
      background-color: transparent; 
+     text-decoration: none;
 }
 a:-webkit-any-link {
     color: -webkit-link;
@@ -203,7 +235,40 @@ color: yellow;
 html, body {
 width: 100%;
 }
- 
+
+
+/*  Blog */
+
+div.viewBlog,div.viewForum {
+    margin: 5px;
+    border: 10px solid white;
+    float: left;
+    width: 1200px;
+    height: 315px;
+}
+
+div.viewBlog:hover {
+    border: 10px solid lightblue;
+}
+div.desc {
+    padding: 15px;
+    text-align: center;
+}
+.editContent{
+margin-right: 2em;  
+margin-top: 1.5em; 
+text-align: right; 
+float: right;
+
+}
+
+div.viewForum:hover {
+    -moz-box-shadow: 0 0 10px #ccc; 
+-webkit-box-shadow: 0 0 10px #ccc; 
+box-shadow: 0 0 10px #ccc; 
+}
+/* Forum */
+
 </style>
 <script>
 
@@ -240,7 +305,8 @@ function checkPass(){
 </head>
 <body ng-app="myApp"> 
 
-<div class="jumbotron">
+<div class="jumbotron" ng-controller="UserController as ctrl">
+
   <div class="header-row" style="padding-top: 0px; padding-bottom: 0px;">
 
 		<div class="header-logo" data-margin-top="51px" data-margin-bottom="21px" data-margin-left="0px" data-margin-right="0px" style="margin-top: -106px; ">
@@ -251,12 +317,27 @@ function checkPass(){
 		<div class="collapse navbar-collapse navbar-right">
      <ul class="nav navbar-nav navbar-left">
 
-      <li class="link menubar"><a href="#"><span>H</span><span>O</span><span>M</span><span>E</span></a></li>
+      <li class="link menubar"><a href="#home"><span>H</span><span>O</span><span>M</span><span>E</span></a></li>
        <li class="link menubar"><a href="#"><span>A</span><span>B</span><span>O</span><span>U</span><span>T</span></a></li>
+        <li class="link menubar"><a href="#forum"><span>F</span><span>O</span><span>R</span><span>U</span><span>M</span></a></li>
        <li class="link menubar"><a href="#blog"><span>B</span><span>L</span><span>O</span><span>G</span></a></li>
-       <li class="link menubar"><a href="#login"><span>S</span><span>i</span><span>g</span><span>n</span><span>&nbsp</span><span>I</span><span>n</span></a></li>
-        <li class="link menubar"><a href="#register"><span>S</span><span>i</span><span>g</span><span>n</span><span>&nbsp</span><span>U</span><span>p</span></a></li>
+        <li class="link menubar"><a href="#jobs"><span>J</span><span>O</span><span>B</span><span>S</span></a></li>
+        
+       <li ng-hide="userName" class="link menubar"><a href="#login"><span>S</span><span>i</span><span>g</span><span>n</span><span>&nbsp</span><span>I</span><span>n</span></a></li>
+        <li  ng-hide="userName" class="link menubar"><a href="#register"><span>S</span><span>i</span><span>g</span><span>n</span><span>&nbsp</span><span>U</span><span>p</span></a></li>   
+        
+        <li ng-if="userName" ><a class="dropdown-toggle link menubar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span>M</span><span>y</span><span>&nbsp</span><span>A</span><span>c</span><span>c</span><span>o</span><span>u</span><span>n</span><span>t</span><span>&nbsp</span><span class="caret"></span></a>
+        <ul class="dropdown-menu">
+									<li><a class="hvr-bounce-to-bottom" style="text-decoration: none;" href="#"><span class="glyphicon glyphicon-user"></span> My Profile</a></li>
+                                 	<li><a class="hvr-bounce-to-bottom" style="text-decoration: none;" href="#"><span class="glyphicon glyphicon-cog"></span> Setting</a></li>
+                                    <li><a class="hvr-bounce-to-bottom" style="text-decoration: none;" href="#logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+                                   
+								</ul>
+        </li>    
      </ul>
+     
+     
+     
     </div>
 
 	</div>
